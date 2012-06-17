@@ -71,7 +71,7 @@ double Scene::logLikelihood() const
 void Scene::print(ostream& out) const
 {
 	for(size_t i=0; i<pixels.size(); i++)
-		for(size_t j=0; j<pixels[i].size(); i++)
+		for(size_t j=0; j<pixels[i].size(); j++)
 			out<<pixels[i][j]<<' ';
 }
 
