@@ -42,6 +42,23 @@ double Scene::perturb()
 {
 	double logH = 0.;
 
+	double chance = pow(10., 0.5 - 4.*randomU());
+	double scale = pow(10., 1.5 - 6.*randomU());
+	double U;
+
+	for(size_t i=0; i<pixels.size(); i++)
+	{
+		for(size_t j=0; j<pixels[i].size(); j++)
+		{
+			if(randomU() <= chance)
+			{
+				U = 1. - exp(-pixels[i][j]);
+				U += scale*randn();
+				U = mod(U, 1.);
+				pixels[i][j] = -log(1. - U);
+			}
+		}
+	}
 
 	return logH;
 }
