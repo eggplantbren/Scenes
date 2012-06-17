@@ -26,7 +26,7 @@
 class Scene:public DNest3::Model
 {
 	private:
-		std::vector<double> params;
+		std::vector< std::vector<double> > pixels;
 
 	public:
 		Scene();

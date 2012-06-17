@@ -26,51 +26,40 @@ using namespace std;
 using namespace DNest3;
 
 Scene::Scene()
-:params(20)
+:pixels(1000, vector<double>(1000))
 {
 
 }
 
 void Scene::fromPrior()
 {
-	for(size_t i=0; i<params.size(); i++)
-		params[i] = -0.5 + randomU();
+	for(size_t i=0; i<pixels.size(); i++)
+		for(size_t j=0; j<pixels[i].size(); j++)
+			pixels[i][j] = -log(randomU());
 }
 
 double Scene::perturb()
 {
-	int which = randInt(params.size());
-	params[which] += pow(10., 1.5-6*randomU())*randn();
-	params[which] = mod(params[which] + 0.5, 1.) - 0.5;
-	return 0.;
+	double logH = 0.;
+
+
+	return logH;
 }
 
 double Scene::logLikelihood() const
 {
-	double u = 0.01;
-	double v = 0.1;
-	double C = log(1.0/sqrt(2*M_PI));
-	double logl1 = 0;
-	double logl2 = 0;
-
-	for(size_t i=0; i<params.size(); i++)
-	{
-		logl1 += C - log(u) - 0.5*pow((params[i] - 0.031)/u, 2);
-		logl2 += C - log(v) - 0.5*pow(params[i]/v, 2);
-	}
-	logl1 += log(100.0);
-
-	return logsumexp(logl1, logl2);
+	return 0.;
 }
 
-void Scene::print(std::ostream& out) const
+void Scene::print(ostream& out) const
 {
-	for(size_t i=0; i<params.size(); i++)
-		out<<params[i]<<' ';
+	for(size_t i=0; i<pixels.size(); i++)
+		for(size_t j=0; j<pixels[i].size(); i++)
+			out<<pixels[i][j]<<' ';
 }
 
 string Scene::description() const
 {
-	return string("Each column is one of the 20 parameters.");
+	return string("A million pixels.");
 }
 
