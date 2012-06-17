@@ -19,7 +19,7 @@
 
 #include <iostream>
 #include "Start.h"
-#include "SpikeSlab.h"
+#include "Scene.h"
 
 using namespace std;
 using namespace DNest3;
@@ -27,9 +27,9 @@ using namespace DNest3;
 int main(int argc, char** argv)
 {
 	#ifndef DNest3_No_Boost
-	MTSampler<SpikeSlab> sampler = setup_mt<SpikeSlab>(argc, argv);
+	MTSampler<Scene> sampler = setup_mt<Scene>(argc, argv);
 	#else
-	Sampler<SpikeSlab> sampler = setup<SpikeSlab>(argc, argv);
+	Sampler<Scene> sampler = setup<Scene>(argc, argv);
 	#endif
 
 	sampler.run();

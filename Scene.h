@@ -17,19 +17,19 @@
 * along with DNest3. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef _SpikeSlab_
-#define _SpikeSlab_
+#ifndef _Scene_
+#define _Scene_
 
 #include "Model.h"
 #include <vector>
 
-class SpikeSlab:public DNest3::Model
+class Scene:public DNest3::Model
 {
 	private:
 		std::vector<double> params;
 
 	public:
-		SpikeSlab();
+		Scene();
 
 		// Generate the point from the prior
 		void fromPrior();

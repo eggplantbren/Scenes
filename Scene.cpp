@@ -17,7 +17,7 @@
 * along with DNest3. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "SpikeSlab.h"
+#include "Scene.h"
 #include "RandomNumberGenerator.h"
 #include "Utils.h"
 #include <cmath>
@@ -25,19 +25,19 @@
 using namespace std;
 using namespace DNest3;
 
-SpikeSlab::SpikeSlab()
+Scene::Scene()
 :params(20)
 {
 
 }
 
-void SpikeSlab::fromPrior()
+void Scene::fromPrior()
 {
 	for(size_t i=0; i<params.size(); i++)
 		params[i] = -0.5 + randomU();
 }
 
-double SpikeSlab::perturb()
+double Scene::perturb()
 {
 	int which = randInt(params.size());
 	params[which] += pow(10., 1.5-6*randomU())*randn();
@@ -45,7 +45,7 @@ double SpikeSlab::perturb()
 	return 0.;
 }
 
-double SpikeSlab::logLikelihood() const
+double Scene::logLikelihood() const
 {
 	double u = 0.01;
 	double v = 0.1;
@@ -63,13 +63,13 @@ double SpikeSlab::logLikelihood() const
 	return logsumexp(logl1, logl2);
 }
 
-void SpikeSlab::print(std::ostream& out) const
+void Scene::print(std::ostream& out) const
 {
 	for(size_t i=0; i<params.size(); i++)
 		out<<params[i]<<' ';
 }
 
-string SpikeSlab::description() const
+string Scene::description() const
 {
 	return string("Each column is one of the 20 parameters.");
 }
