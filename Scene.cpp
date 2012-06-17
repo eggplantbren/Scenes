@@ -21,12 +21,13 @@
 #include "RandomNumberGenerator.h"
 #include "Utils.h"
 #include <cmath>
+#include <iomanip>
 
 using namespace std;
 using namespace DNest3;
 
 Scene::Scene()
-:pixels(1000, vector<double>(1000))
+:pixels(256, vector<double>(256))
 {
 
 }
@@ -70,6 +71,7 @@ double Scene::logLikelihood() const
 
 void Scene::print(ostream& out) const
 {
+	out<<setprecision(4);
 	for(size_t i=0; i<pixels.size(); i++)
 		for(size_t j=0; j<pixels[i].size(); j++)
 			out<<pixels[i][j]<<' ';
