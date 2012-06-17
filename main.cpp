@@ -26,13 +26,9 @@ using namespace DNest3;
 
 int main(int argc, char** argv)
 {
-	#ifndef DNest3_No_Boost
-	MTSampler<Scene> sampler = setup_mt<Scene>(argc, argv);
-	#else
 	Sampler<Scene> sampler = setup<Scene>(argc, argv);
-	#endif
-
 	sampler.run();
+
 	return 0;
 }
 
