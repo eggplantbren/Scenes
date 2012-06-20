@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-sample = np.atleast_2d(np.loadtxt('posterior_sample.txt'))
+sample = np.atleast_2d(np.loadtxt('sample.txt'))
 
 plt.ion()
 plt.hold(False)
