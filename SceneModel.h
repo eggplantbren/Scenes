@@ -21,12 +21,13 @@
 #define _SceneModel_
 
 #include "Model.h"
+#include "Scene.h"
 #include <vector>
 
 class SceneModel:public DNest3::Model
 {
 	private:
-		std::vector< std::vector<double> > pixels;
+		Scene scene;
 
 	public:
 		SceneModel();

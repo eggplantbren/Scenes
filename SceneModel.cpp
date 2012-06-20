@@ -27,16 +27,16 @@ using namespace std;
 using namespace DNest3;
 
 SceneModel::SceneModel()
-:pixels(256, vector<double>(256))
+:scene(256, 256)
 {
 
 }
 
 void SceneModel::fromPrior()
 {
-	for(size_t i=0; i<pixels.size(); i++)
-		for(size_t j=0; j<pixels[i].size(); j++)
-			pixels[i][j] = -log(randomU());
+	for(int i=0; i<scene.get_ni(); i++)
+		for(int j=0; j<scene.get_nj(); j++)
+			scene(i, j) = -log(randomU());
 }
 
 double SceneModel::perturb()
@@ -47,16 +47,16 @@ double SceneModel::perturb()
 	double scale = pow(10., 1.5 - 6.*randomU());
 	double U;
 
-	for(size_t i=0; i<pixels.size(); i++)
+	for(int i=0; i<scene.get_ni(); i++)
 	{
-		for(size_t j=0; j<pixels[i].size(); j++)
+		for(int j=0; j<scene.get_nj(); j++)
 		{
 			if(randomU() <= chance)
 			{
-				U = 1. - exp(-pixels[i][j]);
+				U = 1. - exp(-scene(i, j));
 				U += scale*randn();
 				U = mod(U, 1.);
-				pixels[i][j] = -log(1. - U);
+				scene(i, j) = -log(1. - U);
 			}
 		}
 	}
@@ -72,13 +72,13 @@ double SceneModel::logLikelihood() const
 void SceneModel::print(ostream& out) const
 {
 	out<<setprecision(4);
-	for(size_t i=0; i<pixels.size(); i++)
-		for(size_t j=0; j<pixels[i].size(); j++)
-			out<<pixels[i][j]<<' ';
+	for(int i=0; i<scene.get_ni(); i++)
+		for(int j=0; j<scene.get_nj(); j++)
+			out<<scene(i, j)<<' ';
 }
 
 string SceneModel::description() const
 {
-	return string("A million pixels.");
+	return string("256^2 pixels");
 }
 
