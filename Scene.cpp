@@ -10,6 +10,11 @@ Scene::Scene(int ni, int nj)
 
 }
 
+void Scene::blur(const Scene& psf)
+{
+
+}
+
 double Scene::operator () (int i, int j) const
 {
 	return pixels[i][j];

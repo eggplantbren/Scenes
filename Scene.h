@@ -13,6 +13,9 @@ class Scene
 	public:
 		Scene(int ni, int nj);
 
+		// Blur with a PSF
+		void blur(const Scene& psf);
+
 		// Element access
 		double operator () (int i, int j) const;
 		double& operator () (int i, int j);
