@@ -17,7 +17,7 @@
 * along with DNest3. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "Scene.h"
+#include "SceneModel.h"
 #include "RandomNumberGenerator.h"
 #include "Utils.h"
 #include <cmath>
@@ -26,20 +26,20 @@
 using namespace std;
 using namespace DNest3;
 
-Scene::Scene()
+SceneModel::SceneModel()
 :pixels(256, vector<double>(256))
 {
 
 }
 
-void Scene::fromPrior()
+void SceneModel::fromPrior()
 {
 	for(size_t i=0; i<pixels.size(); i++)
 		for(size_t j=0; j<pixels[i].size(); j++)
 			pixels[i][j] = -log(randomU());
 }
 
-double Scene::perturb()
+double SceneModel::perturb()
 {
 	double logH = 0.;
 
@@ -64,12 +64,12 @@ double Scene::perturb()
 	return logH;
 }
 
-double Scene::logLikelihood() const
+double SceneModel::logLikelihood() const
 {
 	return 0.;
 }
 
-void Scene::print(ostream& out) const
+void SceneModel::print(ostream& out) const
 {
 	out<<setprecision(4);
 	for(size_t i=0; i<pixels.size(); i++)
@@ -77,7 +77,7 @@ void Scene::print(ostream& out) const
 			out<<pixels[i][j]<<' ';
 }
 
-string Scene::description() const
+string SceneModel::description() const
 {
 	return string("A million pixels.");
 }

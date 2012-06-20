@@ -17,19 +17,19 @@
 * along with DNest3. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef _Scene_
-#define _Scene_
+#ifndef _SceneModel_
+#define _SceneModel_
 
 #include "Model.h"
 #include <vector>
 
-class Scene:public DNest3::Model
+class SceneModel:public DNest3::Model
 {
 	private:
 		std::vector< std::vector<double> > pixels;
 
 	public:
-		Scene();
+		SceneModel();
 
 		// Generate the point from the prior
 		void fromPrior();
