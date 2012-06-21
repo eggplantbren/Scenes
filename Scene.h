@@ -9,12 +9,14 @@ class Scene
 		int ni, nj, size;
 		std::vector< std::vector<double> > pixels;
 
-
 	public:
 		Scene(int ni, int nj);
 
 		// Blur with a PSF
 		void blur(const Scene& psf);
+
+		// Resize (destructive)
+		void resize(int ni, int j);
 
 		// Element access
 		double operator () (int i, int j) const;

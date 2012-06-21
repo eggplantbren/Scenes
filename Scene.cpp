@@ -10,6 +10,13 @@ Scene::Scene(int ni, int nj)
 
 }
 
+void Scene::resize(int ni, int nj)
+{
+	this->ni = ni; this->nj = nj;
+	size = ni*nj;
+	pixels.resize(ni, vector<double>(nj));
+}
+
 void Scene::blur(const Scene& psf)
 {
 
