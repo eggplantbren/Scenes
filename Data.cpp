@@ -4,6 +4,8 @@
 
 using namespace std;
 
+Data Data::instance;
+
 Data::Data()
 :Scene(0, 0)
 {

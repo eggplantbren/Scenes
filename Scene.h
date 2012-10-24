@@ -17,6 +17,11 @@ class Scene
 
 		// Resize (destructive)
 		void resize(int ni, int j);
+
+		double operator() (int i, int j) const
+		{
+			return pixels[i][j];
+		}
 };
 
 #endif

@@ -20,6 +20,7 @@
 #include "SceneModel.h"
 #include "RandomNumberGenerator.h"
 #include "Utils.h"
+#include "Data.h"
 #include <cmath>
 #include <iomanip>
 
@@ -100,7 +101,15 @@ double SceneModel::perturb()
 
 double SceneModel::logLikelihood() const
 {
-	return 0.;
+	double logL = 0.;
+
+	Data& data = data.get_instance();
+
+	for(int i=0; i<ni; i++)
+		for(int j=0; j<nj; j++)
+			logL += -0.5*pow((data(i, j) - pixels[i][j])/0.2, 2);
+
+	return logL;
 }
 
 void SceneModel::print(ostream& out) const

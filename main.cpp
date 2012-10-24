@@ -19,6 +19,7 @@
 
 #include <iostream>
 #include "Start.h"
+#include "Data.h"
 #include "SceneModel.h"
 
 using namespace std;
@@ -26,6 +27,8 @@ using namespace DNest3;
 
 int main(int argc, char** argv)
 {
+	Data::get_instance().load("data.txt");
+
 	MTSampler<SceneModel> sampler = setup_mt<SceneModel>(argc, argv);
 	sampler.run();
 
