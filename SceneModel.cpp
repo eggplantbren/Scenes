@@ -34,12 +34,14 @@ SceneModel::SceneModel()
 
 void SceneModel::fromPrior()
 {
+	mu = exp(log(1E-3) + log(1E6)*randomU());
+
 	for(int i=0; i<scene.get_ni(); i++)
 		for(int j=0; j<scene.get_nj(); j++)
 			scene(i, j) = -log(randomU());
 }
 
-double SceneModel::perturb()
+double SceneModel::perturb1()
 {
 	double logH = 0.;
 
@@ -60,6 +62,38 @@ double SceneModel::perturb()
 			}
 		}
 	}
+
+	return logH;
+}
+
+double SceneModel::perturb2()
+{
+	double logH = 0.;
+
+	double ratio = 1./mu;
+
+	mu = log(mu);
+	mu += log(1E6)*pow(10., 1.5 - 6.*randomU())*randn();
+	mu = mod(mu - log(1E-3), log(1E6)) + log(1E-3);
+	mu = exp(mu);
+
+	ratio *= mu;
+	for(int i=0; i<scene.get_ni(); i++)
+		for(int j=0; j<scene.get_nj(); j++)
+			scene(i, j) *= ratio;
+
+	return logH;
+}
+
+double SceneModel::perturb()
+{
+	double logH = 0.;
+	int which = randInt(2);
+
+	if(which == 0)
+		logH += perturb1();
+	else
+		logH += perturb2();
 
 	return logH;
 }

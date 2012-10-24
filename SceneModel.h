@@ -27,7 +27,12 @@
 class SceneModel:public DNest3::Model
 {
 	private:
+		double mu;
 		Scene scene;
+
+		// Helper methods
+		double perturb1();
+		double perturb2();
 
 	public:
 		SceneModel();
