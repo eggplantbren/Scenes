@@ -39,7 +39,7 @@ void SceneModel::fromPrior()
 
 	for(int i=0; i<ni; i++)
 		for(int j=0; j<nj; j++)
-			pixels[i][j] = -log(randomU());
+			pixels[i][j] = -mu*log(randomU());
 }
 
 double SceneModel::perturb1()
@@ -56,10 +56,10 @@ double SceneModel::perturb1()
 		{
 			if(randomU() <= chance)
 			{
-				U = 1. - exp(-pixels[i][j]);
+				U = 1. - exp(-pixels[i][j]/mu);
 				U += scale*randn();
 				U = mod(U, 1.);
-				pixels[i][j] = -log(1. - U);
+				pixels[i][j] = -mu*log(1. - U);
 			}
 		}
 	}
@@ -115,6 +115,7 @@ double SceneModel::logLikelihood() const
 void SceneModel::print(ostream& out) const
 {
 	out<<setprecision(4);
+	out<<mu<<' ';
 	for(int i=0; i<ni; i++)
 		for(int j=0; j<nj; j++)
 			out<<pixels[i][j]<<' ';
