@@ -5,7 +5,7 @@
 using namespace std;
 
 Data::Data()
-:scene(0, 0)
+:Scene(0, 0)
 {
 
 }
@@ -22,10 +22,10 @@ void Data::load(const char* filename)
 	fin>>ni>>nj;
 	fin.ignore(1000000, '\n');
 
-	scene.resize(ni, nj);
+	resize(ni, nj);
 	for(int i=0; i<ni; i++)
 		for(int j=0; j<nj; j++)
-			fin>>scene(i, j);
+			fin>>pixels[i][j];
 	fin.close();
 }
 

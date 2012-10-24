@@ -24,11 +24,10 @@
 #include "Scene.h"
 #include <vector>
 
-class SceneModel:public DNest3::Model
+class SceneModel:public DNest3::Model, public Scene
 {
 	private:
 		double mu;
-		Scene scene;
 
 		// Helper methods
 		double perturb1();

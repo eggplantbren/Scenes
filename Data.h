@@ -3,10 +3,10 @@
 
 #include "Scene.h"
 
-class Data
+class Data:public Scene
 {
 	private:
-		Scene scene;
+
 
 	public:
 		Data();
